@@ -1,0 +1,8 @@
+{
+  "domain": "gree",
+  "name": "Cooper& Hunter A/C",
+  "documentation": "https://github.com/T-REX-XP/HomeAssistant-GreeClimateComponent/",
+  "dependencies": [],
+  "codeowners": ["@T-REX-XP"],
+  "requirements": ["pycryptodome"]
+}
