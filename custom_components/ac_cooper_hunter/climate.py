@@ -36,13 +36,13 @@ from Crypto.Cipher import AES
 try: import simplejson
 except ImportError: import json as simplejson
 
-REQUIREMENTS = ['pycryptodome']
+#REQUIREMENTS = ['pycryptodome']
 
 _LOGGER = logging.getLogger(__name__)
 
 SUPPORT_FLAGS = SUPPORT_TARGET_TEMPERATURE | SUPPORT_FAN_MODE | SUPPORT_SWING_MODE
 
-DEFAULT_NAME = 'Gree Climate'
+DEFAULT_NAME = 'ac_cooper_hunter'
 
 CONF_TARGET_TEMP_STEP = 'target_temp_step'
 CONF_TEMP_SENSOR = 'temp_sensor'
@@ -55,7 +55,7 @@ CONF_EIGHTDEGHEAT = 'eightdegheat'
 CONF_ENCRYPTION_KEY = 'encryption_key'
 CONF_UID = 'uid'
 
-DEFAULT_PORT = 7000
+DEFAULT_PORT = 12414
 DEFAULT_TIMEOUT = 10
 DEFAULT_TARGET_TEMP_STEP = 1
 
@@ -110,12 +110,12 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     encryption_key = config.get(CONF_ENCRYPTION_KEY)
     uid = config.get(CONF_UID)
     
-    _LOGGER.info('Adding Gree climate device to hass')
+    _LOGGER.info('Adding CooperHunter climate device to hass')
     async_add_devices([
-        GreeClimate(hass, name, ip_addr, port, mac_addr, timeout, target_temp_step, temp_sensor_entity_id, lights_entity_id, xfan_entity_id, health_entity_id, powersave_entity_id, sleep_entity_id, eightdegheat_entity_id, hvac_modes, fan_modes, swing_modes, encryption_key, uid)
+        CHClimate(hass, name, ip_addr, port, mac_addr, timeout, target_temp_step, temp_sensor_entity_id, lights_entity_id, xfan_entity_id, health_entity_id, powersave_entity_id, sleep_entity_id, eightdegheat_entity_id, hvac_modes, fan_modes, swing_modes, encryption_key, uid)
     ])
 
-class GreeClimate(ClimateDevice):
+class CHClimate(ClimateDevice):
 
     def __init__(self, hass, name, ip_addr, port, mac_addr, timeout, target_temp_step, temp_sensor_entity_id, lights_entity_id, xfan_entity_id, health_entity_id, powersave_entity_id, sleep_entity_id, eightdegheat_entity_id,  hvac_modes, fan_modes, swing_modes, encryption_key=None, uid=None):
         _LOGGER.info('Initialize the GREE climate device')
